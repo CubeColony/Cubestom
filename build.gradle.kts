@@ -2,6 +2,7 @@ plugins {
     `java-library`
     id("minestom.publishing-conventions")
     id("minestom.native-conventions")
+    id("maven-publish")
     alias(libs.plugins.blossom)
 }
 
@@ -97,3 +98,16 @@ dependencies {
     api("io.github.jglrxavpok.hephaistos:gson:${libs.versions.hephaistos.get()}")
 }
 
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            pom {
+                group = "net.cubecolony"
+                artifactId = "cubestom"
+                version = "1.0"
+            }
+
+            from(components["java"])
+        }
+    }
+}
